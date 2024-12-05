@@ -34,21 +34,19 @@ def read_lines(file_path: str, converter: Callable[[str], T]) -> list[T]:
     return lines
 
 
-def read_file(file_path: str) -> list[str]:
-    lines: list[str] = []
+def read_file(file_path: str) -> str:
+    file_content: str = ""
 
     try:
         with open(file_path, "r", encoding="utf-8") as file:
-            lines = file.readlines()
-
-            return lines
+            return file.read()
 
     except FileNotFoundError as e:
         print(FILE_NOT_FOUND_ERROR.format(file_path, e.strerror))
     except IOError as e:
         print(FILE_IO_ERROR.format(file_path, e.strerror))
 
-    return lines
+    return file_content
 
 
 def create_file_path(module_file: str, file_name: str) -> str:
